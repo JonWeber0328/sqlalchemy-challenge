@@ -72,13 +72,27 @@ def stations():
     # Create our session from Python to the database
     session = Session(engine)
 
-    # Query all dates and prcp measurements
+    # Query all stations
     results = session.query(Station.name, Station.id, Station.station).all()
     session.close()
 
     return jsonify(results)
+#######################################################
+# Query the dates and temperature observations of the most active station for the last year of data
+# Return a JSON list of temperature observations (TOBS) for the previous year
+@app.route("/api/v1.0/tobs")
+def tobs():
 
+    # Create our session from Python to the database
+    session = Session(engine)
 
+    # Query dates and tobs measurements of most active station for last year
+    results = session.query(Measurement.date, Measurement.station, Measurement.tobs).\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) >= '2016-08-23').\
+        filter(Measurement.station == 'USC00519281').all()
+    session.close()
 
+    return jsonify(results)
+#######################################################
 if __name__ == "__main__":
     app.run(debug=True)
