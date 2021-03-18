@@ -44,14 +44,15 @@ def home():
     )
 
 #######################################################
-# Convert the query results to a dictionary
+# Convert the query results to a dictionary using date as the key and prcp as the value.
+# Return the JSON representation of your dictionary.
 @app.route("/api/v1.0/precipitation")
 def precipitaion():
     
     # Create our session from Python to the database
     session = Session(engine)
 
-    # Query all passengers
+    # Query all dates and prcp measurements
     results = session.query(Measurement.date, Measurement.prcp).all()
     session.close()
 
@@ -59,14 +60,23 @@ def precipitaion():
     all_prcp = []
     for date, prcp, in results:
         prcp_dict = {}
-        prcp_dict["date"] = date
-        prcp_dict["prcp"] = prcp
+        prcp_dict[date] = prcp
         all_prcp.append(prcp_dict)
     
     return jsonify(all_prcp)
 #######################################################
+# Return a JSON list of stations from the dataset
+@app.route("/api/v1.0/stations")
+def stations():
 
+    # Create our session from Python to the database
+    session = Session(engine)
 
+    # Query all dates and prcp measurements
+    results = session.query(Station.name, Station.id, Station.station).all()
+    session.close()
+
+    return jsonify(results)
 
 
 
