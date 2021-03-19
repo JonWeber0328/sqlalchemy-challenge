@@ -98,6 +98,7 @@ def tobs():
 #   and the max temperature for a given start or start-end range.
 # When given the start only, calculate TMIN, TAVG, 
 #   and TMAX for all dates greater than and equal to the start date.
+
 @app.route("/api/v1.0/<start>")
 def min(start):
 
@@ -123,7 +124,7 @@ def min(start):
         filter(func.strftime('%Y-%m-%d', Measurement.date) >= '2010-01-01').all()
     session.close()
 
-    avg = [{"Date": avg[0][1], "Average": avg[0][2]}]
+    avg = [{"Dates": "2010-01-01 and after", "Average": avg[0][2]}]
     
     # Query dates and tobs measurements greater than start date
     #   to find the maximum tobs
@@ -139,6 +140,7 @@ def min(start):
 #   and the max temperature for a given start or start-end range.
 #  When given the start and the end date, calculate the TMIN, TAVG, 
 #   and TMAX for dates between the start and end date inclusive.
+
 @app.route("/api/v1.0/<start>/<end>")
 def minmax(start,end):
 
@@ -166,7 +168,7 @@ def minmax(start,end):
         filter(func.strftime('%Y-%m-%d', Measurement.date) <= '2017-08-23').all()
     session.close()
 
-    avg2 = [{"Date": avg2[0][1], "Minimum": avg2[0][2]}]
+    avg2 = [{"Dates": "2010-01-01 to 2017-08-23", "Average": avg2[0][2]}]
 
     # Query dates and tobs measurements greater than start date and less than end date
     #   to find the average tobs
@@ -178,6 +180,6 @@ def minmax(start,end):
     max2 = [{"Date": max2[0][1], "Maximum": max2[0][0]}]
 
     return jsonify(min2,avg2,max2)
-
+#######################################################
 if __name__ == "__main__":
     app.run(debug=True)
