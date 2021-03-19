@@ -94,5 +94,90 @@ def tobs():
 
     return jsonify(results)
 #######################################################
+# Return a JSON list of the minimum temperature, the average temperature, 
+#   and the max temperature for a given start or start-end range.
+# When given the start only, calculate TMIN, TAVG, 
+#   and TMAX for all dates greater than and equal to the start date.
+@app.route("/api/v1.0/<start>")
+def min(start):
+
+    # Create our session from Python to the database
+    session = Session(engine)
+
+    # Query dates to find first date
+    first = session.query(Measurement).order_by(Measurement.date.asc()).first()
+    #first = '2010-01-01'
+    session.close()
+
+    # Query dates and tobs measurements greater than start date
+    #   to find the minimum tobs
+    lowest = session.query(Measurement.tobs, Measurement.date, func.min(Measurement.tobs)).\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) >= '2010-01-01').all()
+    session.close()
+
+    lowest = [{"Date": lowest[0][1], "Minimum": lowest[0][0]}]
+
+    # Query dates and tobs measurements greater than start date
+    #   to find the average tobs
+    avg = session.query(Measurement.tobs, Measurement.date, func.avg(Measurement.tobs)).\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) >= '2010-01-01').all()
+    session.close()
+
+    avg = [{"Date": avg[0][1], "Average": avg[0][2]}]
+    
+    # Query dates and tobs measurements greater than start date
+    #   to find the maximum tobs
+    max = session.query(Measurement.tobs, Measurement.date, func.max(Measurement.tobs)).\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) >= '2010-01-01').all()
+    session.close()
+
+    max = [{"Date": max[0][1], "Maximum": max[0][0]}]
+    
+    return jsonify(lowest,avg,max)
+#######################################################
+# Return a JSON list of the minimum temperature, the average temperature, 
+#   and the max temperature for a given start or start-end range.
+#  When given the start and the end date, calculate the TMIN, TAVG, 
+#   and TMAX for dates between the start and end date inclusive.
+@app.route("/api/v1.0/<start>/<end>")
+def minmax(start,end):
+
+    # Create our session from Python to the database
+    session = Session(engine)
+
+    # Query dates to find last date
+    last = session.query(Measurement).order_by(Measurement.date.desc()).first()
+    session.close()
+    #last = '2017-08-23'
+
+    # Query dates and tobs measurements greater than start date and less than end date
+    #   to find the minimum tobs
+    min2 = session.query(Measurement.tobs, Measurement.date, func.min(Measurement.tobs)).\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) >= '2010-01-01').\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) <= '2017-08-23').all()
+    session.close()
+
+    min2 = [{"Date": min2[0][1], "Minimum": min2[0][0]}]
+
+    # Query dates and tobs measurements greater than start date and less than end date
+    #   to find the average tobs
+    avg2 = session.query(Measurement.tobs, Measurement.date, func.avg(Measurement.tobs)).\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) >= '2010-01-01').\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) <= '2017-08-23').all()
+    session.close()
+
+    avg2 = [{"Date": avg2[0][1], "Minimum": avg2[0][2]}]
+
+    # Query dates and tobs measurements greater than start date and less than end date
+    #   to find the average tobs
+    max2 = session.query(Measurement.tobs, Measurement.date, func.max(Measurement.tobs)).\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) >= '2010-01-01').\
+        filter(func.strftime('%Y-%m-%d', Measurement.date) <= '2017-08-23').all()
+    session.close()
+
+    max2 = [{"Date": max2[0][1], "Maximum": max2[0][0]}]
+
+    return jsonify(min2,avg2,max2)
+
 if __name__ == "__main__":
     app.run(debug=True)
