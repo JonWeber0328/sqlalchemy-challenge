@@ -1,193 +1,164 @@
-# sqlalchemy-challenge
-This is the first SQLAlchemy challenge!
+# Python SQLAlchemy Climate Analysis
+This repo uses Python3 and the SQLAlchemy library to do a basic climate analysis and data exploration of Honolulu, Hawaii climate data measurements existing in an SQLite database. It also has a Flask API that can run queries and return JSON data from our database.
 
-# SQLAlchemy Homework - Surfs Up!
 
-### Before You Begin
+## **Getting Started**
+#
+**These instructions will get you a copy of the project up and running on your local machine for developement and testing purposes. See [Deployment](#Deployment "Goto **Deployment**") for notes on how to deploy the project on a live system.**
 
-1. Create a new repository for this project called `sqlalchemy-challenge`. **Do not add this homework to an existing repository**.
 
-2. Clone the new repository to your computer.
+## **Prerequisites**
+#
+**What things you need to install the software and how to install them.**
+
+* GitHub Account
+
+* Python
+    * Libraries: pandas, numpy, matplotlib, SQLAlchemy, DateTime, and SciPy
+
+* Git
+
+## **Installing**
+#
+**A step by step series of examples that tell you how to get a development environment running.**
+
+*We are using Python and Jupyter Notebook so those two should be installed. I recommend using [Anaconda](https://docs.anaconda.com/anaconda/user-guide/index.html) and [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/) (both are free) to create a virtual environment if you currently don't have either one installed. Follow the instructions below to set these up on a PC. For additional information on Python Virtual Environments click [here](https://docs.python.org/3/tutorial/venv.html).*
+
+**Python**
+* Download and install [Anaconda](https://www.anaconda.com/products/individual)
+    * Click download and select the latest Python version.
+    * Open the installer and follow the instructions to complete the installation.
+* Verify [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/) is installed by entering the following command into your terminal window:
+```
+conda --version
+```
+* Update Conda by running the following command into your terminal window:
+```
+conda update conda
+```
+
+* From your terminal run the following code to install [pip](https://pip.pypa.io/en/stable/):
+```
+conda install pip
+```
+* *pip is the package installer for Python. This will come in handy for the Python libraries we will be installing.*
+    * *Python is infamous for its [libraries](https://en.wikipedia.org/wiki/Category:Python_(programming_language)_scientific_libraries).*
 
-3. Add your Jupyter notebook and `app.py` to this folder. These will be the main scripts to run for analysis.
+**Git**
+* Download a free version control system called [Git](https://git-scm.com/).
+    * *Git is a great way to interact with [GitHub](https://github.com/). You are currently viewing this repository on GitHub so I'm assuming you already have an account. If not, Sign up now.*
 
-4. Push the above changes to GitHub.
+    * Go through the installation until you get to the "Choosing the default editor used by Git".
+        * Select "Use Visual Studio Code as Git's default editor" if you don't already have a code editor installed. 
+            * Download Visual Studio Code [here](https://code.visualstudio.com/).
+    * Set up your user name in Git by following the instructions [here](https://docs.github.com/en/get-started/getting-started-with-git/setting-your-username-in-git).
+    * Set up your user email address in Git by following the instructions [here](https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/managing-email-preferences/setting-your-commit-email-address).
+    * Set up your SSH keys in Git by following the steps in this [video](https://www.youtube.com/watch?v=Nf2Ggt3Mwgk).
 
-![surfs-up.png](Images/surfs-up.png)
+**Python Libraries**
 
-Congratulations! You've decided to treat yourself to a long holiday vacation in Honolulu, Hawaii! To help with your trip planning, you need to do some climate analysis on the area. The following outlines what you need to do.
+*Click the library name for instructions on how to download.*
+* [pandas](https://pandas.pydata.org/docs/getting_started/install.html)
+* [numpy](https://numpy.org/install/)  
+* [matplotlib](https://matplotlib.org/stable/users/installing.html) 
+* [SQLAlchemy](https://docs.sqlalchemy.org/en/14/intro.html#installation)
+* [DateTime](https://pypi.org/project/DateTime/)
+* [SciPy](https://www.scipy.org/install.html)
 
-## Step 1 - Climate Analysis and Exploration
 
-To begin, use Python and SQLAlchemy to do basic climate analysis and data exploration of your climate database. All of the following analysis should be completed using SQLAlchemy ORM queries, Pandas, and Matplotlib.
+**Clone the repo**
+1. In GitHub, in this repository (repo), Fork a copy of this repo by selecting "Fork".
+    * For additional information click [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/adding-and-cloning-repositories/cloning-and-forking-repositories-from-github-desktop).
+    
+    * You should now have a Fork of this repo in your "Your repositories" on your GitHub account. 
+2. In GitHub under "Your repositories, select the name of this repo.
+    * Find the "Code" dropdown.
+        * Select "SSH" and copy the entire line of code.
+        *It should look similar to: "git@github.com:YourUserName/RepoName.git"*
 
-* Use the provided [starter notebook](climate_starter.ipynb) and [hawaii.sqlite](Resources/hawaii.sqlite) files to complete your climate analysis and data exploration.
+3. Open A Git Bash terminal window where you would like to clone this repo.
+    * *For now, you can open the terminal window on your desktop if you don't have another location in mind.*
 
-* Use SQLAlchemy `create_engine` to connect to your sqlite database.
+4. Type the following code into your Git Bash terminal:
+```
+git clone
+```
 
-* Use SQLAlchemy `automap_base()` to reflect your tables into classes and save a reference to those classes called `Station` and `Measurement`.
+5. Paste the SSH key copied from step 2 after "git clone ", then press Enter.
+    * *You should now have a clone of this repo on your local machine.* 
 
-* Link Python to the database by creating an SQLAlchemy session.
 
-* **Important** Don't forget to close out your session at the end of your notebook.
+## **Deployment**
+#
 
-### Precipitation Analysis
+**Open Visual Studio Code**
 
-* Start by finding the most recent date in the data set.
+1. Open your local copy of the repo in Visual Studio Code.
 
-* Using this date, retrieve the last 12 months of precipitation data by querying the 12 preceding months of data. ~~**Note** you do not pass in the date as a variable to your query.~~
+2. Create a new file in VacationPy folder and WeatherPy folder called "api_keys.py"
 
-* Select only the `date` and `prcp` values.
+3. In both api_keys.py files, enter the following lines of code:
+```
+weather_api_key = "<your OpenWeather API key goes here>"
+g_key = "<your Google API key goes here>"
+```
+4. Save these changes in Visual Studio Code.
 
-* Load the query results into a Pandas DataFrame and set the index to the date column.
+5. Open a Git Bash terminal from your repo file and enter the following code:
+```
+git add .
+```
+Press Enter
+```
+git commit -m "<your meaningful note about what you did goes here>"
+```
+Press Enter
+```
+git push origin main
+```
+Press Enter
 
-* Sort the DataFrame values by `date`.
+*You should now see both files on your local repo copy on your computer and your repo on GitHub.*
 
-* Plot the results using the DataFrame `plot` method.
+**Open Jupyter Notebook**
 
-  ![precipitation](Images/precipitation.png)
+1. Open a Git Bash terminal from your repo file.
 
-* Use Pandas to print the summary statistics for the precipitation data.
+2. In your Git Bash terminal, type the following code: `source activate PythonData`
+    * *(PythonData) should now be displayed in your Git Bash terminal.*
 
-### Station Analysis
+3. In your Git Bash terminal, type the following code: `jupyter notebook`
+    * *You should now see a Jupyter Notebook tab open in your web browser.*
 
-* Design a query to calculate the total number of stations in the dataset.
+# **Acknowledgments**
+#
+* I'd like to thank [Dominic LaBella](https://www.linkedin.com/in/dominiclabella/) for teaching me what I know about Python.
 
-* Design a query to find the most active stations (i.e. which stations have the most rows?).
+## **Project Visuals**
+#
+![Images/heatmap.png](Images/heatmap.png)
 
-  * List the stations and observation counts in descending order.
+![Images/hotel_map.png](Images/hotel_map.png)
 
-  * Which station id has the highest number of observations?
+![](WeatherPy/LatitudeVsCloudiness.png)
 
-  * Using the most active station id, calculate the lowest, highest, and average temperature.
+![](WeatherPy/LatitudeVsCloudinessNRegress.png)
+![](WeatherPy/LatitudeVsCloudinessSRegress.png)
 
-  * Hint: You will need to use a function such as `func.min`, `func.max`, `func.avg`, and `func.count` in your queries.
+![](WeatherPy/LatitudeVsHumidity.png)
 
-* Design a query to retrieve the last 12 months of temperature observation data (TOBS).
+![](WeatherPy/LatitudeVsHumidityNRegress.png)
+![](WeatherPy/LatitudeVsHumiditySRegress.png)
 
-  * Filter by the station with the highest number of observations.
+![](WeatherPy/LatitudeVsTemperature.png)
 
-  * Query the last 12 months of temperature observation data for this station.
+![](WeatherPy/LatitudeVsTemperatureNRegress.png)
+![](WeatherPy/LatitudeVsTemperatureSRegress.png)
 
-  * Plot the results as a histogram with `bins=12`.
+![](WeatherPy/LatitudeVsWindspeed.png)
 
-    ![station-histogram](Images/station-histogram.png)
+![](WeatherPy/LatitudeVsWindspeedNRegress.png)
+![](WeatherPy/LatitudeVsWindspeedSRegress.png)
 
-* Close out your session.
 
-- - -
 
-## Step 2 - Climate App
-
-Now that you have completed your initial analysis, design a Flask API based on the queries that you have just developed.
-
-* Use Flask to create your routes.
-
-### Routes
-
-* `/`
-
-  * Home page.
-
-  * List all routes that are available.
-
-* `/api/v1.0/precipitation`
-
-  * Convert the query results to a dictionary using `date` as the key and `prcp` as the value.
-
-  * Return the JSON representation of your dictionary.
-
-* `/api/v1.0/stations`
-
-  * Return a JSON list of stations from the dataset.
-
-* `/api/v1.0/tobs`
-  * Query the dates and temperature observations of the most active station for the last year of data.
-
-  * Return a JSON list of temperature observations (TOBS) for the previous year.
-
-* `/api/v1.0/<start>` and `/api/v1.0/<start>/<end>`
-
-  * Return a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
-
-  * When given the start only, calculate `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date.
-
-  * When given the start and the end date, calculate the `TMIN`, `TAVG`, and `TMAX` for dates between the start and end date inclusive.
-
-## Hints
-
-* You will need to join the station and measurement tables for some of the queries.
-
-* Use Flask `jsonify` to convert your API data into a valid JSON response object.
-
-- - -
-
-## Bonus: Other Recommended Analyses
-
-* The following are optional challenge queries. These are highly recommended to attempt, but not required for the homework.
-
-* Use the provided [temp_analysis_bonus_1_starter.ipynb](temp_analysis_bonus_1_starter.ipynb) and [temp_analysis_bonus_1_starter](temp_analysis_bonus_2_starter.ipynb) starter notebooks for each bonus challenge.
-
-### Temperature Analysis I
-
-* Hawaii is reputed to enjoy mild weather all year. Is there a meaningful difference between the temperature in, for example, June and December?
-
-* Use pandas to perform this portion.
-
-  * Convert the date column format from string to datetime.
-
-  * Set the date column as the DataFrame index
-
-  * Drop the date column
-
-* Identify the average temperature in June at all stations across all available years in the dataset. Do the same for December temperature.
-
-* Use the t-test to determine whether the difference in the means, if any, is statistically significant. Will you use a paired t-test, or an unpaired t-test? Why?
-
-### Temperature Analysis II
-
-* You are looking to take a trip from August first to August seventh of this year, but are worried that the weather will be less than ideal. Using historical data in the dataset find out what the temperature has previously looked like.
-
-* The starter notebook contains a function called `calc_temps` that will accept a start date and end date in the format `%Y-%m-%d`. The function will return the minimum, average, and maximum temperatures for that range of dates.
-
-* Use the `calc_temps` function to calculate the min, avg, and max temperatures for your trip using the matching dates from a previous year (i.e., use "2017-08-01").
-
-* Plot the min, avg, and max temperature from your previous query as a bar chart.
-
-  * Use "Trip Avg Temp" as the title.
-
-  * Use the average temperature as the bar height (y value).
-
-  * Use the peak-to-peak (TMAX-TMIN) value as the y error bar (YERR).
-
-    ![temperature](Images/temperature.png)
-
-### Daily Rainfall Average
-
-* Now that you have an idea of the temperature lets check to see what the rainfall has been, you don't want to go when it rains the whole time!
-
-* Calculate the rainfall per weather station using the previous year's matching dates.
-
-  * Sort this in descending order by precipitation amount and list the station, name, latitude, longitude, and elevation.
-
-* Calculate the daily normals. Normals are the averages for the min, avg, and max temperatures. You are provided with a function called `daily_normals` that will calculate the daily normals for a specific date. This date string will be in the format `%m-%d`. Be sure to use all historic TOBS that match that date string.
-
-  * Set the start and end date of the trip.
-
-  * Use the date to create a range of dates.
-
-  * Strip off the year and save a list of strings in the format `%m-%d`.
-
-  * Use the `daily_normals` function to calculate the normals for each date string and append the results to a list called `normals`.
-
-* Load the list of daily normals into a Pandas DataFrame and set the index equal to the date.
-
-* Use Pandas to plot an area plot (`stacked=False`) for the daily normals.
-
-  ![daily-normals](Images/daily-normals.png)
-
-* Close out your session.
-
-### Copyright
-
-Trilogy Education Services © 2020. All Rights Reserved.
