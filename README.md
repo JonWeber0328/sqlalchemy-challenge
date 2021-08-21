@@ -91,44 +91,45 @@ git clone
 ## **Deployment**
 #
 
-**Open Visual Studio Code**
-
-1. Open your local copy of the repo in Visual Studio Code.
-
-2. Create a new file in VacationPy folder and WeatherPy folder called "api_keys.py"
-
-3. In both api_keys.py files, enter the following lines of code:
-```
-weather_api_key = "<your OpenWeather API key goes here>"
-g_key = "<your Google API key goes here>"
-```
-4. Save these changes in Visual Studio Code.
-
-5. Open a Git Bash terminal from your repo file and enter the following code:
-```
-git add .
-```
-Press Enter
-```
-git commit -m "<your meaningful note about what you did goes here>"
-```
-Press Enter
-```
-git push origin main
-```
-Press Enter
-
-*You should now see both files on your local repo copy on your computer and your repo on GitHub.*
-
 **Open Jupyter Notebook**
 
 1. Open a Git Bash terminal from your repo file.
 
-2. In your Git Bash terminal, type the following code: `source activate PythonData`
-    * *(PythonData) should now be displayed in your Git Bash terminal.*
+2. In your Git Bash terminal, type the following code: 
+```
+source activate PythonData
+```
+  * *(PythonData) should now be displayed in your Git Bash terminal.*
 
-3. In your Git Bash terminal, type the following code: `jupyter notebook`
-    * *You should now see a Jupyter Notebook tab open in your web browser.*
+3. In your Git Bash terminal, type the following code: 
+```
+jupyter notebook
+```
+  * *You should now see a Jupyter Notebook tab open in your web browser.*
+
+**Activate Python SQLAlchemy API**
+
+1. Open a Git Bash terminal on your local copy of this repo folder.
+  * Verify you are in the right location by typing the following code:
+    ```
+    ls
+    ```
+    * *You should see something like: "app.py  Images/  README.md  Resources/  SQLAlchemy.ipynb  temp_analysis_bonus_1.ipynb  temp_analysis_bonus_2.ipynb"*
+
+2. In your Git Bash terminal, type the following code:
+```
+python app.py
+```
+  * *You should see something similar to the following:*
+
+  ![screenshot](Images/Screenshot.png)
+
+3. Enter the http address into your browser.
+  * *You should see the following:*
+
+  ![screenshot2](Images/Screenshot2.png)
+
+4. Use the following routes to make an API request via the Flask server to the SQLite database.
 
 ### Routes
 
@@ -167,29 +168,16 @@ Press Enter
 
 ## **Project Visuals**
 #
-![Images/heatmap.png](Images/heatmap.png)
 
-![Images/hotel_map.png](Images/hotel_map.png)
+![Surfs-up](Images/surfs-up.png)
 
-![](WeatherPy/LatitudeVsCloudiness.png)
+![Daily Normals](Images/daily-normals.png)
 
-![](WeatherPy/LatitudeVsCloudinessNRegress.png)
-![](WeatherPy/LatitudeVsCloudinessSRegress.png)
+![Precipitation](Images/precipitation.png)
 
-![](WeatherPy/LatitudeVsHumidity.png)
+![Histogram](Images/station-histogram.png)
 
-![](WeatherPy/LatitudeVsHumidityNRegress.png)
-![](WeatherPy/LatitudeVsHumiditySRegress.png)
-
-![](WeatherPy/LatitudeVsTemperature.png)
-
-![](WeatherPy/LatitudeVsTemperatureNRegress.png)
-![](WeatherPy/LatitudeVsTemperatureSRegress.png)
-
-![](WeatherPy/LatitudeVsWindspeed.png)
-
-![](WeatherPy/LatitudeVsWindspeedNRegress.png)
-![](WeatherPy/LatitudeVsWindspeedSRegress.png)
-
+![Temperature](Images/temperature.png)
+![Describe](Images/describe.png)
 
 
