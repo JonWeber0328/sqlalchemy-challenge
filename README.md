@@ -130,6 +130,37 @@ Press Enter
 3. In your Git Bash terminal, type the following code: `jupyter notebook`
     * *You should now see a Jupyter Notebook tab open in your web browser.*
 
+### Routes
+
+* `/`
+
+  * Home page.
+
+  * Lists all routes that are available.
+
+* `/api/v1.0/precipitation`
+
+  * Converts the query results to a dictionary using `date` as the key and `prcp` as the value.
+
+  * Returns the JSON representation of your dictionary.
+
+* `/api/v1.0/stations`
+
+  * Returns a JSON list of stations from the dataset.
+
+* `/api/v1.0/tobs`
+  * Queries the dates and temperature observations of the most active station for the last year of data.
+
+  * Returns a JSON list of temperature observations (TOBS) for the previous year.
+
+* `/api/v1.0/<start>` and `/api/v1.0/<start>/<end>`
+
+  * Returns a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
+
+  * When given the start only, calculates `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date.
+
+  * When given the start and the end date, calculates the `TMIN`, `TAVG`, and `TMAX` for dates between the start and end date inclusive.
+
 # **Acknowledgments**
 #
 * I'd like to thank [Dominic LaBella](https://www.linkedin.com/in/dominiclabella/) for teaching me what I know about Python.
