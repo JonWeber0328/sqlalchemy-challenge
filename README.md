@@ -1,4 +1,4 @@
-# Python SQLAlchemy Climate Analysis
+# SQLAlchemy Climate Analysis
 This repo uses Python3 and the SQLAlchemy library to do a basic climate analysis and data exploration of Honolulu, Hawaii climate data measurements existing in an SQLite database. It also has a Flask API that can run queries and return JSON data from our database.
 
 
